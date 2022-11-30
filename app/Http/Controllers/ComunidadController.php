@@ -38,7 +38,7 @@ class ComunidadController extends Controller
                     ]);
                     $ciudades = json_decode($response1->getBody()->getContents());
 
-                    $response2 = $this->client->request('GET', 'comunidades', [
+                    $response2 = $this->client->request('GET', '/mostrar-comunidades', [
                         'headers' => [
                             'Authorization' => 'Bearer ' . $token,
                             'Accept' => 'application/json',
