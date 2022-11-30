@@ -30,6 +30,25 @@ class ComunidadController extends Controller
                 $userEstatus = json_decode($responseE->getBody()->getContents());
 
                 if ($userEstatus[0]->estatus == 1) {
+                    $request = new \GuzzleHttp\Psr7\Request('GET', 'obtener-comunidades', [
+                        'headers' => [
+                            'Authorization' => 'Bearer ' . $token,
+                            'Accept' => 'application/json',
+                        ],
+                    ]);
+                    $promise = $this->client->sendAsync($request)->then(function ($response) {
+                        $comunidades = json_decode($response->getBody()->getContents());
+                    });
+                    $promise->wait();
+
+                    /*$response2 = $this->client->request('GET', 'obtener-comunidades', [
+                        'headers' => [
+                            'Authorization' => 'Bearer ' . $token,
+                            'Accept' => 'application/json',
+                        ],
+                    ]);
+                    $comunidades = json_decode($response2->getBody()->getContents());*/
+
                     $response1 = $this->client->request('GET', 'ciudades', [
                         'headers' => [
                             'Authorization' => 'Bearer ' . $token,
@@ -37,14 +56,6 @@ class ComunidadController extends Controller
                         ],
                     ]);
                     $ciudades = json_decode($response1->getBody()->getContents());
-
-                    $response2 = $this->client->request('GET', 'obtener-comunidades', [
-                        'headers' => [
-                            'Authorization' => 'Bearer ' . $token,
-                            'Accept' => 'application/json',
-                        ],
-                    ]);
-                    $comunidades = json_decode($response2->getBody()->getContents());
 
                     return view('/administrador/administrar-comunidades', compact('ciudades', 'comunidades'));
                 } else {
