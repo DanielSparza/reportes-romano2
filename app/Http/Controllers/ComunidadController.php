@@ -30,12 +30,9 @@ class ComunidadController extends Controller
                 $userEstatus = json_decode($responseE->getBody()->getContents());
 
                 if ($userEstatus[0]->estatus == 1) {
-                    $request = new \GuzzleHttp\Psr7\Request('GET', 'obtener-comunidades', [
-                        'headers' => [
-                            'Authorization' => 'Bearer ' . $token,
-                            'Accept' => 'application/json',
-                        ],
-                    ]);
+                    $headers = ['Authorization' => 'Bearer ' . $token, 'Accept' => 'application/json'];
+                    $request = new \GuzzleHttp\Psr7\Request('GET', 'obtener-comunidades', $headers);
+
                     $promise = $this->client->sendAsync($request)->then(function ($response) {
                         $comunidades = json_decode($response->getBody()->getContents());
                     });
