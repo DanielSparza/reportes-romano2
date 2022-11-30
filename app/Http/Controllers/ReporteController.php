@@ -206,7 +206,7 @@ class ReporteController extends Controller
                     ]);
                     $misReportes = json_decode($response->getBody()->getContents());
 
-                    $response2 = $this->client->request('GET', 'comunidades', [
+                    $response2 = $this->client->request('GET', 'mostrar-comunidades', [
                         'headers' => [
                             'Authorization' => 'Bearer ' . $token,
                             'Accept' => 'application/json',
@@ -458,7 +458,7 @@ class ReporteController extends Controller
                     ]);
                     $misReportes = json_decode($response->getBody()->getContents());
 
-                    $response2 = $this->client->request('GET', 'comunidades', [
+                    $response2 = $this->client->request('GET', 'mostrar-comunidades', [
                         'headers' => [
                             'Authorization' => 'Bearer ' . $token,
                             'Accept' => 'application/json',

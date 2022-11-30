@@ -48,7 +48,7 @@ class ClienteController extends Controller
                     ]);
                     $ciudades = json_decode($response2->getBody()->getContents());
 
-                    $response3 = $this->client->request('GET', 'comunidades', [
+                    $response3 = $this->client->request('GET', 'mostrar-comunidades', [
                         'headers' => [
                             'Authorization' => 'Bearer ' . $token,
                             'Accept' => 'application/json',
@@ -105,7 +105,7 @@ class ClienteController extends Controller
                 $userEstatus = json_decode($responseE->getBody()->getContents());
 
                 if ($userEstatus[0]->estatus == 1) {
-                    $response = $this->client->request('GET', 'comunidades-ciudad/' . $clave_ciudad, [
+                    $response = $this->client->request('GET', 'comunidades-por-ciudad/' . $clave_ciudad, [
                         'headers' => [
                             'Authorization' => 'Bearer ' . $token,
                             'Accept' => 'application/json',

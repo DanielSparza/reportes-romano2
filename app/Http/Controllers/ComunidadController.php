@@ -200,7 +200,7 @@ class ComunidadController extends Controller
                         'fk_ciudad' => ['required', 'numeric', 'integer']
                     ]);
 
-                    $this->client->request('POST', 'comunidades', [
+                    $this->client->request('POST', 'guardar-comunidades', [
                         'headers' => [
                             'Authorization' => 'Bearer ' . $token,
                             'Accept' => 'application/json',
@@ -257,7 +257,7 @@ class ComunidadController extends Controller
                         'fk_ciudad' => ['required', 'numeric', 'integer']
                     ]);
 
-                    $this->client->request('PUT', 'actualizar-comunidad/' . $request->id, [
+                    $this->client->request('PUT', 'actualizar-comunidades/' . $request->id, [
                         'headers' => [
                             'Authorization' => 'Bearer ' . $token,
                             'Accept' => 'application/json',
