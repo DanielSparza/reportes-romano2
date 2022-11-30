@@ -30,17 +30,12 @@ class ComunidadController extends Controller
                 $userEstatus = json_decode($responseE->getBody()->getContents());
 
                 if ($userEstatus[0]->estatus == 1) {
-                    //try {
-                    //$token = session('token');
-
                     $response1 = $this->client->request('GET', 'ciudades', [
                         'headers' => [
                             'Authorization' => 'Bearer ' . $token,
                             'Accept' => 'application/json',
                         ],
                     ]);
-
-                    //$response1 = $this->client->request('GET', 'ciudades');
                     $ciudades = json_decode($response1->getBody()->getContents());
 
                     $response2 = $this->client->request('GET', 'comunidades', [
@@ -49,12 +44,9 @@ class ComunidadController extends Controller
                             'Accept' => 'application/json',
                         ],
                     ]);
-                    //$response2 = $this->client->request('GET', 'comunidades');
                     $comunidades = json_decode($response2->getBody()->getContents());
 
                     return view('/administrador/administrar-comunidades', compact('ciudades', 'comunidades'));
-                    // } catch (RequestException $e) {
-                    //}
                 } else {
                     return redirect('/logout');
                 }
