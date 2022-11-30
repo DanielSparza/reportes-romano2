@@ -30,14 +30,6 @@ class ComunidadController extends Controller
                 $userEstatus = json_decode($responseE->getBody()->getContents());
 
                 if ($userEstatus[0]->estatus == 1) {
-                    /*$headers = ['Authorization' => 'Bearer ' . $token, 'Accept' => 'application/json'];
-                    $request = new \GuzzleHttp\Psr7\Request('GET', 'obtener-comunidades', $headers);
-
-                    $promise = $this->client->sendAsync($request)->then(function ($response) {
-                        $comunidades = json_decode($response->getBody()->getContents());
-                    });
-                    $promise->wait();*/
-
                     $response2 = $this->client->request('GET', 'comunidades', [
                         'headers' => [
                             'Authorization' => 'Bearer ' . $token,
@@ -61,7 +53,6 @@ class ComunidadController extends Controller
             } catch (RequestException $e) {
                 if ($e->getCode() == 401) {
                     //SI SE RECIBE UN 405 SE RENUEVA EL TOKEN DE ACCESO
-                    dd($e->getResponse());
                     $renew = $this->client->request('POST', 'auth/refresh', [
                         'headers' => [
                             'Authorization' => 'Bearer ' . $token,
@@ -73,9 +64,7 @@ class ComunidadController extends Controller
 
                     return redirect()->back();
                 } else {
-                    //abort($e->getCode());
-                    dd($e->getResponse());
-                    return response($e);
+                    abort($e->getCode());
                 }
             }
         } else {
@@ -222,7 +211,7 @@ class ComunidadController extends Controller
                         ]
                     ]);
 
-                    return redirect('/administrar-comunidades')->throwResponse();
+                    return redirect('/administrar-comunidades')->with('message', 'Se ha registrado la comunidad correctamente.');
                 } else {
                     return redirect('/logout');
                 }
