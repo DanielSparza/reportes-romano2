@@ -53,7 +53,7 @@ class ComunidadController extends Controller
             } catch (RequestException $e) {
                 if ($e->getCode() == 401) {
                     //SI SE RECIBE UN 405 SE RENUEVA EL TOKEN DE ACCESO
-                    dd($e);
+                    dd($e->getResponse());
                     $renew = $this->client->request('POST', 'auth/refresh', [
                         'headers' => [
                             'Authorization' => 'Bearer ' . $token,
@@ -66,7 +66,7 @@ class ComunidadController extends Controller
                     return redirect()->back();
                 } else {
                     //abort($e->getCode());
-                    dd($e);
+                    dd($e->getResponse());
                     return response($e);
                 }
             }
