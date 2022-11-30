@@ -64,7 +64,8 @@ class ComunidadController extends Controller
 
                     return redirect()->back();
                 } else {
-                    abort($e->getCode());
+                    //abort($e->getCode());
+                    return response($e);
                 }
             }
         } else {
