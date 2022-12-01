@@ -217,24 +217,26 @@ class PaginawebController extends Controller
                     ]);
 
                     $ruta_imagen = "";
-                    
+
                     if ($request->hasFile('imagen_fondo')) {
                         request()->validate([
                             'imagen_fondo' => ['image', 'max:1000']
                         ]);
-                        
-                        try {
-                            $imagenes = $request->file('imagen_fondo')->store('public/empresa');
-                            $url = Storage::url($imagenes);
 
-                            $ruta_imagen = $url;
-                        }catch(Exception $ex){
-                            dd($ex);
+                        $oldimg = "";
+
+                        if (strlen($request->foto_actual) > 9){
+                            $oldimg = substr($request->foto_actual, 9);
                         }
 
-                        File::delete($request->foto_actual); //Elimina la foto antigua
+                        Storage::delete('public/'.$oldimg);
+
+                        $imagenes = $request->file('imagen_fondo')->store('public/empresa');
+                        $url = Storage::url($imagenes);
+
+                        $ruta_imagen = $url;
                     }
-                    
+
                     $this->client->request('PUT', 'actualizar-datos-cabecera/' . $request->id, [
                         'headers' => [
                             'Authorization' => 'Bearer ' . $token,

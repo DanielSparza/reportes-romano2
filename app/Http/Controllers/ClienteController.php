@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use Illuminate\Http\Support\Facades\Storage;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\File;
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Support\Facades\Storage;
 
 class ClienteController extends Controller
 {
@@ -322,12 +322,10 @@ class ClienteController extends Controller
                             'foto_fachada' => ['image', 'max:1000']
                         ]);
 
-                        $img = $request->file('foto_fachada');
-                        $carpeta = 'img/fachadas/';
-                        $nombre_imagen = time() . '_' . $request->fk_ciudad . $img->getClientOriginalName();
+                        $imagenes = $request->file('foto_fachada')->store('public/clientes');
+                        $url = Storage::url($imagenes);
 
-                        $ruta_imagen = $carpeta . $nombre_imagen;
-                        $request->file('foto_fachada')->move($carpeta, $nombre_imagen);
+                        $ruta_imagen = $url;
                     }
 
                     $this->client->request('POST', 'clientes', [
@@ -449,14 +447,18 @@ class ClienteController extends Controller
                             'foto_fachada' => ['image', 'max:1000']
                         ]);
 
-                        $img = $request->file('foto_fachada');
-                        $carpeta = 'img/fachadas/';
-                        $nombre_imagen = time() . '_' . $request->fk_ciudad . $img->getClientOriginalName();
+                        $oldimg = "";
 
-                        $ruta_imagen = $carpeta . $nombre_imagen;
-                        $request->file('foto_fachada')->move($carpeta, $nombre_imagen); //Guarda la foto nueva
+                        if (strlen($request->foto_actual) > 9){
+                            $oldimg = substr($request->foto_actual, 9);
+                        }
 
-                        File::delete($request->foto_actual); //Elimina la foto antigua
+                        Storage::delete('public/'.$oldimg);
+
+                        $imagenes = $request->file('foto_fachada')->store('public/clientes');
+                        $url = Storage::url($imagenes);
+
+                        $ruta_imagen = $url;
                     }
 
                     $this->client->request('PUT', 'actualizar-cliente/' . $request->id, [
