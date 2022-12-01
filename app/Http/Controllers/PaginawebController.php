@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use GuzzleHttp\Client;
@@ -227,8 +228,11 @@ class PaginawebController extends Controller
 
                         $ruta_imagen = $carpeta . $nombre_imagen;
                         
-                        $request->file('imagen_fondo')->move($carpeta, $nombre_imagen); //Guarda la foto nueva
-                        dd($img, $nombre_imagen, $ruta_imagen);
+                        try {
+                            $request->file('imagen_fondo')->move($carpeta, $nombre_imagen); //Guarda la foto nueva
+                        }catch(Exception $ex){
+                            dd($ex);
+                        }
 
                         File::delete($request->foto_actual); //Elimina la foto antigua
                     }
