@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Support\Facades\Storage;
 
 class PaginawebController extends Controller
 {
@@ -223,14 +224,19 @@ class PaginawebController extends Controller
                         ]);
 
                         $img = $request->file('imagen_fondo');
-                        $carpeta = 'img/empresa/';
+                        //$carpeta = 'img/empresa/';
                         //$carpeta = public_path('img/empresa/');
+
                         $nombre_imagen = time() . '_' . $img->getClientOriginalName();
 
-                        $ruta_imagen = $carpeta . $nombre_imagen;
+                        //$ruta_imagen = $carpeta . $nombre_imagen;
                         
                         try {
-                            $request->file('imagen_fondo')->move(public_path($carpeta.$nombre_imagen)); //Guarda la foto nueva
+                            //$request->file('imagen_fondo')->move(public_path($carpeta.$nombre_imagen)); //Guarda la foto nueva
+                            $imagenes = $request->file('imagen_fondo')->store('public/empresa');
+                            $url = Storage::url($imagenes);
+
+                            $ruta_imagen = $url;
                         }catch(Exception $ex){
                             dd($ex);
                         }
