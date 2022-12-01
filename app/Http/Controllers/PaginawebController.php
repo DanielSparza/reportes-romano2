@@ -215,7 +215,7 @@ class PaginawebController extends Controller
                     ]);
 
                     $ruta_imagen = "";
-                    dd($request);
+                    
                     if ($request->hasFile('imagen_fondo')) {
                         request()->validate([
                             'imagen_fondo' => ['image', 'max:1000']
@@ -230,7 +230,7 @@ class PaginawebController extends Controller
 
                         File::delete($request->foto_actual); //Elimina la foto antigua
                     }
-
+                    dd($ruta_imagen);
                     $this->client->request('PUT', 'actualizar-datos-cabecera/' . $request->id, [
                         'headers' => [
                             'Authorization' => 'Bearer ' . $token,
