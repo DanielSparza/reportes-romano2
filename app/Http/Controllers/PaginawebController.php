@@ -226,11 +226,12 @@ class PaginawebController extends Controller
                         $nombre_imagen = time() . '_' . $img->getClientOriginalName();
 
                         $ruta_imagen = $carpeta . $nombre_imagen;
+                        dd($img, $nombre_imagen, $ruta_imagen);
                         $request->file('imagen_fondo')->move($carpeta, $nombre_imagen); //Guarda la foto nueva
 
                         File::delete($request->foto_actual); //Elimina la foto antigua
                     }
-                    dd($ruta_imagen);
+                    
                     $this->client->request('PUT', 'actualizar-datos-cabecera/' . $request->id, [
                         'headers' => [
                             'Authorization' => 'Bearer ' . $token,
@@ -261,7 +262,7 @@ class PaginawebController extends Controller
 
                     return redirect()->back();
                 } else {
-                    dd($e);
+                    dd($e->getResponse());
                     abort($e->getCode());
                 }
             }
