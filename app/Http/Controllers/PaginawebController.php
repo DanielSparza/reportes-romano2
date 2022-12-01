@@ -222,17 +222,8 @@ class PaginawebController extends Controller
                         request()->validate([
                             'imagen_fondo' => ['image', 'max:1000']
                         ]);
-
-                        $img = $request->file('imagen_fondo');
-                        //$carpeta = 'img/empresa/';
-                        //$carpeta = public_path('img/empresa/');
-
-                        $nombre_imagen = time() . '_' . $img->getClientOriginalName();
-
-                        //$ruta_imagen = $carpeta . $nombre_imagen;
                         
                         try {
-                            //$request->file('imagen_fondo')->move(public_path($carpeta.$nombre_imagen)); //Guarda la foto nueva
                             $imagenes = $request->file('imagen_fondo')->store('public/empresa');
                             $url = Storage::url($imagenes);
 
