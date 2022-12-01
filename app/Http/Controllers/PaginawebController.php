@@ -215,7 +215,7 @@ class PaginawebController extends Controller
                     ]);
 
                     $ruta_imagen = "";
-
+                    dd($request);
                     if ($request->hasFile('imagen_fondo')) {
                         request()->validate([
                             'imagen_fondo' => ['image', 'max:1000']
