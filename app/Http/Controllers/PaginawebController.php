@@ -261,6 +261,7 @@ class PaginawebController extends Controller
 
                     return redirect()->back();
                 } else {
+                    dd($e);
                     abort($e->getCode());
                 }
             }
