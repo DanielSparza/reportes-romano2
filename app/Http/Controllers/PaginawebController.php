@@ -226,8 +226,9 @@ class PaginawebController extends Controller
                         $nombre_imagen = time() . '_' . $img->getClientOriginalName();
 
                         $ruta_imagen = $carpeta . $nombre_imagen;
-                        dd($img, $nombre_imagen, $ruta_imagen);
+                        
                         $request->file('imagen_fondo')->move($carpeta, $nombre_imagen); //Guarda la foto nueva
+                        dd($img, $nombre_imagen, $ruta_imagen);
 
                         File::delete($request->foto_actual); //Elimina la foto antigua
                     }
