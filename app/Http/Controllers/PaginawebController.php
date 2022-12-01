@@ -223,7 +223,8 @@ class PaginawebController extends Controller
                         ]);
 
                         $img = $request->file('imagen_fondo');
-                        $carpeta = 'img/empresa/';
+                        //$carpeta = 'img/empresa/';
+                        $carpeta = public_path('img/empresa/');
                         $nombre_imagen = time() . '_' . $img->getClientOriginalName();
 
                         $ruta_imagen = $carpeta . $nombre_imagen;
