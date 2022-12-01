@@ -54,7 +54,7 @@
                                 <tr>
                                     <td>
                                         @if($dato->imagen_fondo != null)
-                                        <img class="img-tabla" src="{!! asset('{{$dato->imagen_fondo}}') !!}" alt="imagen actual de la cabecera">
+                                        <img class="img-tabla" src='{!! asset("{$dato->imagen_fondo}") !!}' alt="imagen actual de la cabecera">
                                         @else
                                         No hay imagen disponible.
                                         @endif
