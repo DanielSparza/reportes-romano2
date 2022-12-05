@@ -20,7 +20,7 @@ class ClienteController extends Controller
 
     public function index()
     {
-        if (auth()->user()->fk_rol == 1) {
+        if (auth()->user()->fk_rol == 1 || auth()->user()->fk_rol == 2) {
             try {
                 $token = session('token');
                 $responseE = $this->client->request('GET', 'validar-estatus/' . auth()->user()->fk_clave_persona, [
@@ -256,7 +256,7 @@ class ClienteController extends Controller
 
     public function store(Request $request)
     {
-        if (auth()->user()->fk_rol == 1) {
+        if (auth()->user()->fk_rol == 1 || auth()->user()->fk_rol == 2) {
             try {
                 $token = session('token');
                 $responseE = $this->client->request('GET', 'validar-estatus/' . auth()->user()->fk_clave_persona, [
@@ -380,7 +380,7 @@ class ClienteController extends Controller
 
     public function update(Request $request)
     {
-        if (auth()->user()->fk_rol == 1) {
+        if (auth()->user()->fk_rol == 1 || auth()->user()->fk_rol == 2) {
             try {
                 $token = session('token');
                 $responseE = $this->client->request('GET', 'validar-estatus/' . auth()->user()->fk_clave_persona, [

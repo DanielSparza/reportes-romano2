@@ -8,7 +8,7 @@
             <div class="col-12 col-lg-4 col-md-4 col-sm-12">
                 <div class="row">
                     <div class="col-12 col-lg-12 col-md-12 col-sm-12 pb-2">
-                        <h5 class="text-center"> <strong>ADMINISTRAR CIUDADES</strong></h5>
+                        <h5 class="text-center"> <strong>ADMINISTRAR CIUDADES & MUNICIPIOS</strong></h5>
                     </div>
                     <div class="col-12 col-lg-12 col-md-12 col-sm-12 btn-derecha">
                         <button class="btn btn-contenido" data-toggle="modal" data-target="#city-add-modal"><strong>Nueva ciudad</strong></button>

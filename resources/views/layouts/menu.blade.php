@@ -51,12 +51,14 @@
                     <span>Administrar usuarios</span>
                 </a>
             </div>
+            @if (auth()->user()->fk_rol == 1 || auth()->user()->fk_rol == 2)
             <div>
                 <a href="/administrar-clientes">
                     <i class="fa-solid fa-user-tag fa-lg" title="Administrar clientes"></i>
                     <span>Administrar clientes</span>
                 </a>
             </div>
+            @endif
             <div>
                 <a href="/administrar-comunidades">
                     <i class="fa-solid fa-signs-post fa-lg" title="Administrar comunidades"></i>
